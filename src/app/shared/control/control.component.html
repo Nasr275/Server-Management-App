@@ -1,4 +1,6 @@
-<p>
-    <label for="">{{label()}}</label>
-    <ng-content select="input, textarea" />
-</p>
+<!-- <p class="control">  we will comment this to make the DOM leaner but we still need the control class for styling and we can't use :host in the style file 
+    becuase we user ViewEncapsulation.None meaning that these styles are now global and don't target the app-control 
+    instead we will put the control class on the app-control selector itself as an input attribute-->
+<label for="">{{label()}}</label>
+<ng-content select="input, textarea" />
+<!-- </p> -->
