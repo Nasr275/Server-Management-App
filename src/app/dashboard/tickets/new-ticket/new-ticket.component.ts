@@ -12,7 +12,16 @@ import { ButtonComponent } from "../../../shared/button/button.component"
 export class NewTicketComponent {
 
 
-  onSubmit() {
+  // onSubmit(titleElement: HTMLInputElement) {
+  //   //console.log(titleElement)
+  //   console.dir(titleElement) //to get an object instead of an element
+  //   const enteredTitle = titleElement.value
+  //   console.log('Entered title' + enteredTitle)
+  // }
+
+  onSubmit(title: string, ticketText: string) {
+    console.log(title)
+    console.log(ticketText)
 
   }
 }
