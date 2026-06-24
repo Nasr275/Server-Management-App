@@ -1,17 +1,22 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ControlComponent } from "../../../shared/control/control.component";
 import { ButtonComponent } from "../../../shared/button/button.component"
 
-@Component({
+
+@Component(
+{
   selector: 'app-new-ticket',
   standalone: true,
   imports: [ControlComponent, ButtonComponent],
   templateUrl: './new-ticket.component.html',
   styleUrl: './new-ticket.component.css'
-})
-export class NewTicketComponent {
+}
+)
 
-  @ViewChild('form') form?: ElementRef<HTMLFormElement>;
+export class NewTicketComponent implements AfterViewInit{
+
+@ViewChild('form') form?: ElementRef<HTMLFormElement>;
+  // private form = viewChild.required<ElementRef<HTMLFormElement>>('form') //newer signal version of ViewChild 
 
   // onSubmit(titleElement: HTMLInputElement) {
   //   //console.log(titleElement)
@@ -20,9 +25,15 @@ export class NewTicketComponent {
   //   console.log('Entered title' + enteredTitle)
   // }
 
+  ngAfterViewInit(): void {
+    console.log("After View INIT")
+    console.log(this.form?.nativeElement)
+  }
   onSubmit(title: string, ticketText: string) {
     console.log(title)
     console.log(ticketText)
     this.form?.nativeElement.reset();
+    //this.form()?.nativeElement.reset()
   }
+
 }

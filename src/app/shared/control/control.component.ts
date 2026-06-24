@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener, input, ViewEncapsulation, ElementRef, inject } from '@angular/core';
+import { Component, HostBinding, HostListener, input, ViewEncapsulation, ElementRef, inject, ContentChild, contentChild, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -13,7 +13,7 @@ import { Component, HostBinding, HostListener, input, ViewEncapsulation, Element
     // Example of event binding using host property
   }
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit {
   //  @HostBinding('class') className = 'control';  //Alternative to the host property but it is discourged and it is only available for compatility reasons
   /* alternative to event binding using host property
   @HostListener('click')   onClick() {
@@ -24,9 +24,20 @@ export class ControlComponent {
 
   private el = inject(ElementRef)
   label = input.required<string>()
+  @ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>
+
+  //private control = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input')
+
+ngAfterContentInit(): void {
+  //...
+}
+
 
   onClick() {
     console.log('Clicked!')
     console.log(this.el)
+    console.log(this.control)
+    //console.log(this.control())
+
   }
 }

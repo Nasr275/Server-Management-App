@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DestroyRef, inject, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject, OnDestroy, OnInit,signal } from '@angular/core';
 
 @Component({
   selector: 'app-server-status',
@@ -8,7 +8,11 @@ import { AfterViewInit, Component, DestroyRef, inject, OnDestroy, OnInit } from 
   styleUrl: './server-status.component.css'
 })
 export class ServerStatusComponent implements OnInit, AfterViewInit {
-  currentStatus: 'online' | 'offline' | 'unknown' = 'online';
+  //currentStatus: 'online' | 'offline' | 'unknown' = 'online';
+  currentStatus = signal<'online' | 'offline' | 'unknown'>('online');
+
+
+
   //This is a typescript feature called literal types
 
   //private interval?: ReturnType<typeof setInterval>;
@@ -31,13 +35,13 @@ export class ServerStatusComponent implements OnInit, AfterViewInit {
       const rand = Math.random()
 
       if (rand < 0.5) {
-        this.currentStatus = 'online'
+        this.currentStatus.set('online')
       }
       else if (rand < 0.9) {
-        this.currentStatus = 'offline'
+        this.currentStatus.set('offline')
       }
       else {
-        this.currentStatus = 'unknown'
+        this.currentStatus.set('unknown')
       }
     }, 5000)  //execute this function every 5 secs
 
